@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "143599255966",
+    "project_id": "smart-charging-echo-system-app",
+    "storage_bucket": "smart-charging-echo-system-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:143599255966:android:35a9efee0e71124fa7d68f",
+        "android_client_info": {
+          "package_name": "com.scesa.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8-1gId9LbRgASweB0eKsep5KFzDqi2dw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
