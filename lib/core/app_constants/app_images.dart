@@ -4,7 +4,6 @@ class AppImages {
 
   static const String baseImageUrl = "assets/images";
   //==========================================================================================//
-  //AdBlip assets
   static const String logo = "$baseImageUrl/logo.png";
 
     //==========================================================================================//

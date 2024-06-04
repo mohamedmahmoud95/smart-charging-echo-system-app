@@ -25,9 +25,9 @@ class SignInScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const AdBlipLogo(
-              height: 200,
-              width: 200,
+            const AppLogo(
+              height: 300,
+              width: 300,
             ),
             TextFieldWidget(label: 'email', textController: emailController),
            const SizedBox(height: 20,),
@@ -43,16 +43,16 @@ class SignInScreen extends StatelessWidget {
 
             const SizedBox(height: 20,),
             ButtonWidget(onPressed: ()async{
-              // await FirebaseAuthServices.instance.register(
-              //   email: emailController.text,
-              //   password: passwordController.text,
-              // );
-
-              await FirebaseAuthServices.instance.signIn(
+              await FirebaseAuthServices.instance.register(
                 email: emailController.text,
                 password: passwordController.text,
               );
-            }, child: const Text('Login')),
+
+              // await FirebaseAuthServices.instance.signIn(
+              //   email: emailController.text,
+              //   password: passwordController.text,
+              // );
+            }, text: 'Login',),
 
           ],
         ),),
