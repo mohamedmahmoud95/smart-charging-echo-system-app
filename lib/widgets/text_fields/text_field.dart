@@ -30,7 +30,9 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
         controller: widget.textController,
         obscureText: isHidden?? false,
         decoration: InputDecoration(
-          border: const OutlineInputBorder(),
+          border: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(12)),
+          ),
           labelText: widget.label,
           prefix: widget.prefix ?? const SizedBox(),
           suffix: widget.suffix == null? const SizedBox() :
