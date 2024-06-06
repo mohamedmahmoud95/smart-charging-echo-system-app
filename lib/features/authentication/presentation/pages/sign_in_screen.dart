@@ -62,7 +62,7 @@ class SignInScreen extends StatelessWidget {
 
   Widget forgotPasswordButton(BuildContext context){
     return TextButtonWidget(text: "Forgot password?",
-        textColors: Colors.teal.shade900,
+        textColors: Colors.yellow.shade800,
         onTap: (){
       Navigator.of(context).pushNamed('reset_password_screen_route');
     });
