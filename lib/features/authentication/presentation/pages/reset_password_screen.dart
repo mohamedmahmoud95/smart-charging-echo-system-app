@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 
+import '../../../../core/theme/app_colors.dart';
 import '../../../../widgets/buttons/button_widget.dart';
 import '../../../../widgets/text_fields/text_field.dart';
 import '../../firebase_auth_services.dart';
@@ -13,6 +14,7 @@ class ResetPasswordScreen extends StatelessWidget {
     TextEditingController emailController = TextEditingController();
 
     return Scaffold(
+      backgroundColor: AppColors.backgroundWhite,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         leading: const BackButton(),
@@ -25,20 +27,21 @@ class ResetPasswordScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               "How it works?",
               style: Theme.of(context).textTheme.titleLarge,
             ),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             Text(
               "Enter your email and we will send you a link to reset your password",
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             TextFieldWidget(
               label: 'email',
@@ -46,7 +49,7 @@ class ResetPasswordScreen extends StatelessWidget {
               textController: emailController,
             ),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             ButtonWidget(
               child:Text( "Sent reset password email",style: Theme.of(context).textTheme.titleMedium,) ,
