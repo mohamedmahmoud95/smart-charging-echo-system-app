@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_charging_echo_system_app/features/authentication/presentation/pages/sign_up_screen.dart';
 
 import '../../features/authentication/presentation/pages/reset_password_screen.dart';
 import '../../features/authentication/presentation/pages/sign_in_screen.dart';
@@ -19,6 +20,10 @@ class AppRouter {
 
       case 'sign_in_screen_route':
         return MaterialPageRoute(builder: (context) => const SignInScreen());
+
+      case 'sign_up_screen_route':
+        return MaterialPageRoute(builder: (context) => const SignUpScreen());
+
 
       case 'reset_password_screen_route':
         return MaterialPageRoute(builder: (context) => const ResetPasswordScreen());
