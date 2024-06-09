@@ -38,14 +38,14 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
           suffix: widget.suffix == null? const SizedBox() :
 
           widget.isHiddenByDefault == false? widget.suffix :
-              GestureDetector(
-                onTap: (){
-                  setState(() {
-                    isHidden = !isHidden;
-                  });
-                },
-                child: widget.suffix,
-              ),
+          GestureDetector(
+            onTap: (){
+              setState(() {
+                isHidden = !isHidden;
+              });
+            },
+            child: widget.suffix,
+          ),
 
 
         ),

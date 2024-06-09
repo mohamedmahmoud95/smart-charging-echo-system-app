@@ -1,61 +1,126 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/theme/app_colors.dart';
+import '../../../../widgets/alert_dialog.dart';
 import '../../../../widgets/buttons/button_widget.dart';
 import '../../../../widgets/buttons/text_button_widget.dart';
 import '../../../../widgets/logo.dart';
 import '../../../../widgets/text_fields/text_field.dart';
-import '../../firebase_auth_services.dart';
+import '../../auth_utility_functions/firebase_auth_services.dart';
 
-class SignUpScreen extends StatelessWidget {
+class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
 
   @override
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController password2Controller = TextEditingController();
+
+  bool passwordIsValid = false;
+  bool passwordMatch = false;
+
+  void validatePassword() {
+    if (passwordController.text.length >= 6) {
+      setState(() {
+        passwordIsValid = true;
+      });
+    } else {
+      setState(() {
+        passwordIsValid = false;
+      });
+    }
+  }
+
+  void validatePasswordMatch() {
+    if (passwordController.text == password2Controller.text) {
+      setState(() {
+        passwordMatch = true;
+      });
+    } else {
+      setState(() {
+        passwordMatch = false;
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-
-    final TextEditingController emailController = TextEditingController();
-    final TextEditingController passwordController = TextEditingController();
-
-
     return Scaffold(
       backgroundColor: AppColors.backgroundWhite,
       body: Center(
-        child:
-        SingleChildScrollView(child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const AppLogo(
-              height: 300,
-              width: 300,
-            ),
-            TextFieldWidget(label: 'email', textController: emailController),
-           const SizedBox(height: 20,),
-            TextFieldWidget(label: 'password', isHiddenByDefault: true,
-              textController: passwordController,
-              suffix: const Icon(Icons.remove_red_eye, ),
-            ),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const AppLogo(
+                height: 300,
+                width: 300,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(0),
+                child: TextFieldWidget(
+                    label: 'email', textController: emailController),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(0),
+                child: TextFieldWidget(
+                  label: 'password',
+                  isHiddenByDefault: true,
+                  textController: passwordController,
+                  suffix: const Icon(
+                    Icons.remove_red_eye,
+                  ),
+                ),
+              ),
 
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-            Padding(padding: const EdgeInsets.all(20), child: signInInsteadButton(context),),],),
 
-            const SizedBox(height: 20,),
-            ButtonWidget(onPressed: ()async{
-              await FirebaseAuthServices.instance.register(
-                email: emailController.text,
-                password: passwordController.text,
-              );
-
-              // await FirebaseAuthServices.instance.signIn(
-              //   email: emailController.text,
-              //   password: passwordController.text,
-              // );
-            }, text: 'Sign Up',),
-
-          ],
-        ),),
+              Padding(
+                padding: const EdgeInsets.all(0),
+                child: TextFieldWidget(
+                  label: 'Re-enter password',
+                  isHiddenByDefault: true,
+                  textController: passwordController,
+                  suffix: const Icon(
+                    Icons.remove_red_eye,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              ButtonWidget(
+                onPressed: () {
+                  signUp(email: emailController.text, password: passwordController.text, context: context);
+                },
+                text: 'Sign Up',
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: signInInsteadButton(context),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -67,16 +132,42 @@ class SignUpScreen extends StatelessWidget {
         const Text(
           "Already have an account? ",
         ),
-
         TextButtonWidget(
-            text:  "Sign In",
+            text: "Sign In",
             textColors: Colors.red.shade700,
             onTap: () {
-              Navigator.of(context).pushReplacementNamed('sign_in_screen_route');
+              Navigator.of(context)
+                  .pushReplacementNamed('sign_in_screen_route');
             }),
       ],
     );
   }
 
+  Future<dynamic> signUp(
+      {required String email,
+        required String password,
+        required BuildContext context}) async {
+    String? _errorMessage;
 
+    try {
+      await FirebaseAuthServices.instance.register(
+        email: email,
+        password: password,
+      );
+      Navigator.pushReplacementNamed(context, 'homeRoute');
+    } catch (e) {
+      if (context.mounted) {
+        showDialog(
+            builder: (context) => AlertDialogWidget(
+              title: "Error",
+              contentText: e.toString(),
+            ),
+            context: context);
+      }
+
+      setState(() {
+        _errorMessage = e.toString();
+      });
+    }
+  }
 }
