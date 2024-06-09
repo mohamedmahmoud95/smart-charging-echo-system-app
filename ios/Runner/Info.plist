@@ -6,6 +6,12 @@
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
 	<string>Smart Charging Echo System App</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+    <string>This app needs access to your location to provide personalized experiences based on your location.</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>This app needs access to your location at all times to provide continuous location-based services.</string>
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>This app needs access to your location both while the app is in use and in the background to provide the best experience.</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>

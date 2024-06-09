@@ -57,6 +57,10 @@ PODS:
     - GoogleUtilities/Logger
     - GoogleUtilities/Privacy
   - GTMSessionFetcher/Core (3.4.1)
+  - location (0.0.1):
+    - Flutter
+  - permission_handler_apple (9.3.0):
+    - Flutter
   - PromisesObjC (2.4.0)
   - RecaptchaInterop (100.0.0)
 
@@ -65,6 +69,8 @@ DEPENDENCIES:
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - Flutter (from `Flutter`)
   - google_maps_flutter_ios (from `.symlinks/plugins/google_maps_flutter_ios/ios`)
+  - location (from `.symlinks/plugins/location/ios`)
+  - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
 
 SPEC REPOS:
   trunk:
@@ -88,6 +94,10 @@ EXTERNAL SOURCES:
     :path: Flutter
   google_maps_flutter_ios:
     :path: ".symlinks/plugins/google_maps_flutter_ios/ios"
+  location:
+    :path: ".symlinks/plugins/location/ios"
+  permission_handler_apple:
+    :path: ".symlinks/plugins/permission_handler_apple/ios"
 
 SPEC CHECKSUMS:
   Firebase: 0312a2352584f782ea56f66d91606891d4607f06
@@ -102,6 +112,8 @@ SPEC CHECKSUMS:
   GoogleMaps: 8939898920281c649150e0af74aa291c60f2e77d
   GoogleUtilities: ea963c370a38a8069cc5f7ba4ca849a60b6d7d15
   GTMSessionFetcher: 8000756fc1c19d2e5697b90311f7832d2e33f6cd
+  location: d5cf8598915965547c3f36761ae9cc4f4e87d22e
+  permission_handler_apple: 9878588469a2b0d0fc1e048d9f43605f92e6cec2
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
 
