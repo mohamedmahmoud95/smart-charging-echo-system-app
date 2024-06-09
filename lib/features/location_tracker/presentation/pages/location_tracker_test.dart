@@ -4,7 +4,7 @@ import 'package:location/location.dart';
 import '../../location_utility_functions/location_permissions_service.dart';
 import '../../location_utility_functions/loction_utility_functions.dart';
 
-class LocationScreen extends StatefulWidget {
+class  LocationScreen extends StatefulWidget {
   const LocationScreen({super.key});
 
   @override
@@ -35,13 +35,17 @@ class _LocationScreenState extends State<LocationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    if (_currentLocation == null)
+      {
+        _initializeLocationService();
+      }
     return Scaffold(
       appBar: AppBar(
         title: Text('Location Tracker'),
       ),
       body: Center(
         child: _currentLocation == null
-            ? CircularProgressIndicator()
+            ? const CircularProgressIndicator()
             : Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

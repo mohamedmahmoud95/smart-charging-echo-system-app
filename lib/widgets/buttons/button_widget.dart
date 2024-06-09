@@ -32,7 +32,7 @@ class ButtonWidget extends StatelessWidget {
     return SizedBox(
       height: height ?? 50,
       width: width ?? MediaQuery.of(context).size.width - 40,
-      child: Expanded(child:  ElevatedButton(
+      child:   ElevatedButton(
         onPressed: () {
           onPressed();
         },
@@ -56,7 +56,7 @@ class ButtonWidget extends StatelessWidget {
                 ),
               ),
         ),
-      ),),
+      ),
     );
   }
 }
