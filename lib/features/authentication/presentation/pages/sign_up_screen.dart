@@ -6,6 +6,7 @@ import '../../../../widgets/buttons/button_widget.dart';
 import '../../../../widgets/buttons/text_button_widget.dart';
 import '../../../../widgets/logo.dart';
 import '../../../../widgets/text_fields/text_field.dart';
+import '../../auth_utility_functions/auth_input_validator.dart';
 import '../../auth_utility_functions/firebase_auth_services.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -22,30 +23,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   bool passwordIsValid = false;
   bool passwordMatch = false;
-
-  void validatePassword() {
-    if (passwordController.text.length >= 6) {
-      setState(() {
-        passwordIsValid = true;
-      });
-    } else {
-      setState(() {
-        passwordIsValid = false;
-      });
-    }
-  }
-
-  void validatePasswordMatch() {
-    if (passwordController.text == password2Controller.text) {
-      setState(() {
-        passwordMatch = true;
-      });
-    } else {
-      setState(() {
-        passwordMatch = false;
-      });
-    }
-  }
+  bool emailIsValid = false;
 
   @override
   void dispose() {
@@ -65,16 +43,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const AppLogo(
-                height: 300,
-                width: 300,
+                height: 200,
+                width: 200,
               ),
               Padding(
-                padding: const EdgeInsets.all(0),
+                padding: const EdgeInsets.all(16),
                 child: TextFieldWidget(
                     label: 'email', textController: emailController),
               ),
               Padding(
-                padding: const EdgeInsets.all(0),
+                padding: const EdgeInsets.all(16),
                 child: TextFieldWidget(
                   label: 'password',
                   isHiddenByDefault: true,
@@ -87,11 +65,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
 
               Padding(
-                padding: const EdgeInsets.all(0),
+                padding: const EdgeInsets.all(16),
                 child: TextFieldWidget(
                   label: 'Re-enter password',
                   isHiddenByDefault: true,
-                  textController: passwordController,
+                  textController: password2Controller,
                   suffix: const Icon(
                     Icons.remove_red_eye,
                   ),
@@ -102,7 +80,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
               ButtonWidget(
                 onPressed: () {
-                  signUp(email: emailController.text, password: passwordController.text, context: context);
+                  // AuthUtilityFunctions.validatePassword(passwordController.text);
+                  handleSignUpRequest(context);
+                  // signUp(email: emailController.text, password: passwordController.text, context: context);
                 },
                 text: 'Sign Up',
               ),
@@ -168,6 +148,31 @@ class _SignUpScreenState extends State<SignUpScreen> {
       setState(() {
         _errorMessage = e.toString();
       });
+    }
+  }
+
+  void handleSignUpRequest(BuildContext context) {
+    setState(() {
+
+      passwordIsValid = AuthInputValidator.validatePassword(passwordController.text);
+      passwordMatch = passwordController.text == password2Controller.text;
+      emailIsValid = AuthInputValidator.validateEmail(emailController.text);
+    });
+    if (!emailIsValid)
+    {
+      showDialog(context: context, builder: (context)=>
+      const AlertDialogWidget(contentText: "Email is invalid"));
+    }
+    else if (!passwordIsValid) {
+      showDialog(context: context, builder: (context)=>
+      const AlertDialogWidget(contentText: "Password is invalid"));
+    }
+    else if (passwordIsValid && !passwordMatch) {
+      showDialog(context: context, builder: (context)=>
+      const AlertDialogWidget(contentText: "Passwords don't match"));
+    }
+    else {
+      signUp(email: emailController.text, password: passwordController.text, context: context);
     }
   }
 }
