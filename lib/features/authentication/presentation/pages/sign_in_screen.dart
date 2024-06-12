@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/theme/app_colors.dart';
+import '../../../../generated/l10n.dart';
 import '../../../../widgets/alert_dialog.dart';
 import '../../../../widgets/buttons/button_widget.dart';
 import '../../../../widgets/buttons/text_button_widget.dart';
@@ -35,29 +37,25 @@ class _SignInScreenState extends State<SignInScreen> {
       body: Center(
         child: SingleChildScrollView(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const SizedBox(
-                height: 20,
-              ),
               const AppLogo(
-                height: 300,
-                width: 300,
+                height: 200,
+                width: 200,
               ),
               const SizedBox(
                 height: 20,
               ),
-
               Padding(
-                padding: const EdgeInsets.all(0),
+                padding: const EdgeInsets.all(16),
                 child: TextFieldWidget(
-                    label: 'email', textController: emailController),
+                    label: S.of(context).email, textController: emailController),
               ),
               Padding(
-                padding: const EdgeInsets.all(0),
+                padding: const EdgeInsets.all(16),
                 child: TextFieldWidget(
-                  label: 'password',
+                  label: S.of(context).password,
                   isHiddenByDefault: true,
                   textController: passwordController,
                   suffix: const Icon(
@@ -78,7 +76,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 onPressed: () {
                   signIn(
                     email: emailController.text,
-                    password: passwordController.text,
+                    password: passwordController.text, context: context,
                   );
                 },
                 text: 'Login',
@@ -90,8 +88,9 @@ class _SignInScreenState extends State<SignInScreen> {
               ButtonWidget(
                 onPressed: () {
                   signIn(
-                    email: "m.raslan97@gmail.com",
-                    password: "Test1234#",
+                      email: "m.raslan97@gmail.com",
+                      password: "Test1234#",
+                      context: context
                   );
                 },
                 text: 'Login as Raslan',
@@ -145,27 +144,37 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   Future<dynamic> signIn(
-      {required String email, required String password}) async {
-    String? _errorMessage;
-
+      {required String email, required String password, required BuildContext context}) async {
     try {
       await FirebaseAuthServices.instance.signIn(
         email: email,
         password: password,
       );
       Navigator.pushReplacementNamed(context, 'homeRoute');
-    } catch (e) {
+    } on FirebaseAuthException catch (e) {
+      // Display the specific error message from FirebaseAuthException
       if (context.mounted) {
         showDialog(
-            builder: (context) =>
-                AlertDialogWidget(
-                  title: "Error",
-                  contentText: e.toString(),), context: context);
+          context: context,
+          builder: (context) => AlertDialogWidget(
+            title: "Error",
+            contentText: e.message ?? "An unknown error occurred.",
+          ),
+        );
       }
-
-      setState(() {
-        _errorMessage = e.toString();
-      });
+    } catch (e) {
+      // Catch any other type of exception
+      if (context.mounted) {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialogWidget(
+            title: "Error",
+            contentText: e.toString(),
+          ),
+        );
+      }
     }
   }
+
 }
+
