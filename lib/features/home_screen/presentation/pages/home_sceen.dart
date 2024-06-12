@@ -12,9 +12,11 @@ class HomeSceen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundWhite,
+     // backgroundColor: AppColors.backgroundWhite,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        //backgroundColor: Colors.transparent,
+       // backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+
         leading: const DrawerButton(),
         title: Text(
           "Home",
