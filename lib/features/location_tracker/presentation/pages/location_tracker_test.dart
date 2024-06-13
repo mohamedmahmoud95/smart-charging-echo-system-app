@@ -23,19 +23,17 @@ class _LocationScreenState extends State<LocationScreen> {
 
   Future<void> _initializeLocationService() async {
     bool granted = await PermissionService.requestLocationPermission();
-    debugPrint("asking for location permission granted: $granted");
 
     if (!granted) {
         debugPrint("location permission not granted");
     }
     if (granted) {
-      debugPrint("location permission granted");
       await _locationService.initialize();
       _locationService.getLocationUpdates().listen((LocationData locationData) {
         setState(() {
           _currentLocation = locationData;
+          debugPrint("current location: ${locationData.latitude}, ${locationData.longitude}");
         });
-        debugPrint("location: ${locationData.latitude}, ${locationData.longitude}");
 
       });
     }
@@ -49,13 +47,13 @@ class _LocationScreenState extends State<LocationScreen> {
       }
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Location Trackerr'),
+        title: const Text('Location Tracker'),
       ),
       body: Center(
         child:
-        // _currentLocation == null
-        //     ? const CircularProgressIndicator()
-        //     :
+        _currentLocation == null
+            ? const CircularProgressIndicator()
+            :
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
