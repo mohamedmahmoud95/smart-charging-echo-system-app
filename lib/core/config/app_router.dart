@@ -4,6 +4,7 @@ import '../../features/authentication/presentation/pages/sign_in_screen.dart';
 import '../../features/authentication/presentation/pages/sign_up_screen.dart';
 import '../../features/home_screen/presentation/pages/home_sceen.dart';
 import '../../features/location_tracker/presentation/pages/location_tracker_test.dart';
+import '../../features/map_view/presentation/pages/map_view_screen.dart';
 
 
 const String rootRoute = '/';
@@ -14,7 +15,7 @@ const String settingsRoute = 'settings_screen_route';
 const  String profileRoute = 'profile_screen_route';
 const  String homeRoute = 'home_screen_route';
 const String locationTrackerScreenRoute = "location_tracker_screen_route";
-
+const String mapViewScreenRoute = "map_view_screen_route";
 class AppRouter {
 
 
@@ -38,6 +39,11 @@ class AppRouter {
 
       case "location_tracker_screen_route":
         return MaterialPageRoute(builder: (context) =>  const LocationScreen());
+
+     case "map_view_screen_route":
+        return MaterialPageRoute(builder: (context) =>  const MapViewScreen());
+
+
       default:
         return MaterialPageRoute(builder: (context) => const SignInScreen());
     }

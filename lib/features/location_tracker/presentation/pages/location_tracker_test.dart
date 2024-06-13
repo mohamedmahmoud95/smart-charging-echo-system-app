@@ -20,21 +20,28 @@ class _LocationScreenState extends State<LocationScreen> {
     super.initState();
     _initializeLocationService();
   }
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   Future<void> _initializeLocationService() async {
     bool granted = await PermissionService.requestLocationPermission();
 
-    if (!granted) {
-        debugPrint("location permission not granted");
-    }
+    // if (!granted) {
+    //     debugPrint("location permission not granted");
+    // }
     if (granted) {
       await _locationService.initialize();
       _locationService.getLocationUpdates().listen((LocationData locationData) {
-        setState(() {
-          _currentLocation = locationData;
-          debugPrint("current location: ${locationData.latitude}, ${locationData.longitude}");
-        });
-
+        if (mounted) {
+          setState(() {
+            _currentLocation = locationData;
+            debugPrint(
+                "current location: ${locationData.latitude}, ${locationData
+                    .longitude}");
+          });
+        }
       });
     }
   }

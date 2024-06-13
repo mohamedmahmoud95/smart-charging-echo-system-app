@@ -45,6 +45,14 @@ class HomeSceen extends StatelessWidget {
 
             ListTile(
               onTap: () {
+                Navigator.of(context).pushNamed("map_view_screen_route");
+              },
+              title: const Text('Map View '),
+            ),
+
+
+            ListTile(
+              onTap: () {
                 logout(context);
               },
               title: const Text('Logout'),
