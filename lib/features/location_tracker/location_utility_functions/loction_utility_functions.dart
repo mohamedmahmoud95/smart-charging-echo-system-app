@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:location/location.dart';
 
 class LocationUtilityFunctions {
@@ -26,6 +27,7 @@ class LocationUtilityFunctions {
 
   Stream<LocationData> getLocationUpdates() {
     return _location.onLocationChanged;
+
   }
 
   Future<LocationData?> getCurrentLocation() async {
