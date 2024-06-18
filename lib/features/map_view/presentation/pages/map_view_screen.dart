@@ -65,7 +65,8 @@ class _MapViewScreenState extends State<MapViewScreen> {
         .map((place) => Marker(
         onTap: (){
           debugPrint("tapped on ${place.name}");
-          mapController.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: place.latLng, zoom: 20, tilt: 59, bearing: 192.833490139579),), );
+          mapController.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: place.latLng, zoom: 17,
+              ),), );
         },
               markerId: MarkerId(place.id),
               position: place.latLng,
@@ -73,7 +74,7 @@ class _MapViewScreenState extends State<MapViewScreen> {
                 title: place.name,
                 onTap: (){
                   debugPrint("tapped on ${place.name}");
-                  mapController.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: place.latLng, zoom: 20, tilt: 59, bearing: 192.833490139579),), );
+                  mapController.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: place.latLng, zoom: 17, ),), );
                 }
               ),
               icon: BitmapDescriptor.defaultMarkerWithHue(

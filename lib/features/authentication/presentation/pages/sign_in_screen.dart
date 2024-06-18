@@ -40,20 +40,23 @@ class _SignInScreenState extends State<SignInScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const AppLogo(
-                height: 200,
-                width: 200,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
+
+              const SizedBox (height: 30),
+              Image.asset("assets/images/landing4.png"),
+              // const AppLogo(
+              //   height: 200,
+              //   width: 200,
+              // ),
+              // const SizedBox(
+              //   height: 20,
+              // ),
               Padding(
-                padding: const EdgeInsets.all(16),
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: TextFieldWidget(
                     label: S.of(context).email, textController: emailController),
               ),
               Padding(
-                padding: const EdgeInsets.all(16),
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: TextFieldWidget(
                   label: S.of(context).password,
                   isHiddenByDefault: true,
