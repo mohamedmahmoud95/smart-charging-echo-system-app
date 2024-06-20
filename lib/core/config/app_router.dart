@@ -35,7 +35,7 @@ class AppRouter {
         return MaterialPageRoute(builder: (context) => const ResetPasswordScreen());
 
       case 'homeRoute':
-        return MaterialPageRoute(builder: (context) => const HomeSceen());
+        return MaterialPageRoute(builder: (context) => const HomeScreen());
 
       case "location_tracker_screen_route":
         return MaterialPageRoute(builder: (context) =>  const LocationScreen());
