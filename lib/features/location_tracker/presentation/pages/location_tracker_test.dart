@@ -67,6 +67,8 @@ class _LocationScreenState extends State<LocationScreen> {
 
             Text('Latitude: ${_currentLocation!.latitude}'),
             Text('Longitude: ${_currentLocation!.longitude}'),
+            Text('altitude: ${_currentLocation!.altitude}'),
+
           ],
         ),
       ),

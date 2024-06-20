@@ -88,19 +88,19 @@ class _SignInScreenState extends State<SignInScreen> {
                 height: 20,
               ),
 
-              ButtonWidget(
-                onPressed: () {
-                  signIn(
-                      email: "m.raslan97@gmail.com",
-                      password: "Test1234#",
-                      context: context
-                  );
-                },
-                text: 'Login as Raslan',
-              ),
-              const SizedBox(
-                height: 20,
-              ),
+              // ButtonWidget(
+              //   onPressed: () {
+              //     signIn(
+              //         email: "m.raslan97@gmail.com",
+              //         password: "Test1234#",
+              //         context: context
+              //     );
+              //   },
+              //   text: 'Login as Raslan',
+              // ),
+              // const SizedBox(
+              //   height: 20,
+              // ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
