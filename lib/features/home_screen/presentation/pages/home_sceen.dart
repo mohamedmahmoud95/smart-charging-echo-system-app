@@ -123,46 +123,4 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  void logout(BuildContext context) {
-    FirebaseAuthServices.instance.signOut();
-
-    Navigator.pushReplacementNamed(context, 'signInRoute');
-  }
-
-  void deleteAccount(BuildContext context) {
-    showDialog(
-        context: context,
-        builder: (context) => AlertDialogWidget(
-              title: "Warning",
-              contentText: "Are you sure you want to delete your account?",
-              actionWidget: Row(
-                children: [
-                  ButtonWidget(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    text: 'Cancel',
-                    horizontalPadding: 5,
-                    width: 120,
-                    fontSize: 15,
-                    backgroundColor: AppColors.red,
-                  ),
-                  const SizedBox(
-                    width: 20,
-                  ),
-                  ButtonWidget(
-                    onPressed: () {
-                      FirebaseAuthServices.instance.deleteAccount();
-
-                      Navigator.pushReplacementNamed(context, 'signInRoute');
-                    },
-                    text: 'Yes',
-                    horizontalPadding: 5,
-                    width: 120,
-                    fontSize: 15,
-                  )
-                ],
-              ),
-            ));
-  }
 }
