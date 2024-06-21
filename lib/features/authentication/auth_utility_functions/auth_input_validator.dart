@@ -8,7 +8,8 @@ class AuthInputValidator {
   static bool validatePassword(String password) {
     bool passwordIsValid = true;
     if (password.isEmpty) {
-      passwordIsValid = true;
+      passwordIsValid = false;
+      return false;
     }
 
     if (password.length < 6) {
