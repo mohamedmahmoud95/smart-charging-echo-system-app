@@ -1,4 +1,4 @@
-# smart_charging_eco_system_app
+# smart_charging_ecosystem_app
 
 A new Flutter project.
 
